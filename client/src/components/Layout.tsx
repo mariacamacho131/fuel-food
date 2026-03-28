@@ -11,7 +11,7 @@ import {
   PieChart, Lock
 } from "lucide-react";
 
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663411491932/HeqmeGRYAW4QbTnBi6aChF/image4_fb7a76de.png";
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663411491932/HeqmeGRYAW4QbTnBi6aChF/logo-fuelfood-color_bd7f5309.webp";
 
 const navItems = [
   { path: "/", label: "Mis Datos", icon: Calculator, step: 0, desc: "Datos personales y deporte" },
@@ -36,11 +36,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <aside className="w-64 shrink-0 bg-gray-900 border-r border-gray-800 flex flex-col">
         {/* Logo */}
-        <div className="p-5 border-b border-gray-800">
+        <div className="px-4 py-4 border-b border-gray-800 flex items-center justify-center">
           <img
             src={LOGO_URL}
-            alt="NutritionFC"
-            className="h-10 w-auto brightness-0 invert"
+            alt="FuelFood"
+            className="w-36 h-auto object-contain"
           />
         </div>
 
