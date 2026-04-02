@@ -372,13 +372,15 @@ export default function Home() {
                       type="number"
                       value={datosPersonales.porcentajeGraso}
                       onChange={e => {
-                        const val = parseFloat(e.target.value) || 0;
-                        const nivel: NivelGraso =
-                          datosPersonales.genero === "Mujer"
-                            ? val < 20 ? "Poco" : val < 30 ? "Medio" : "Alto"
-                            : val < 15 ? "Poco" : val < 25 ? "Medio" : "Alto";
-                        updateDatosPersonales({ porcentajeGraso: val, nivelGraso: nivel });
-                      }}
+  const val = parseFloat(e.target.value);
+  if (!isNaN(val)) {
+    const nivel: NivelGraso =
+      datosPersonales.genero === "Mujer"
+        ? val < 20 ? "Poco" : val < 30 ? "Medio" : "Alto"
+        : val < 15 ? "Poco" : val < 25 ? "Medio" : "Alto";
+    updateDatosPersonales({ porcentajeGraso: val, nivelGraso: nivel });
+  }
+}}
                       className="bg-gray-800 border-gray-700 text-white focus:border-cyan-500 w-24"
                     />
                     <span className="text-gray-400 text-sm">%</span>
