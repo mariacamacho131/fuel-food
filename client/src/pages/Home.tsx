@@ -192,7 +192,10 @@ export default function Home() {
                 <Input
                   type="number"
                   value={datosPersonales.peso}
-                  onChange={e => updateDatosPersonales({ peso: parseFloat(e.target.value) || 0 })}
+                  onChange={e => {
+  const val = parseFloat(e.target.value);
+  if (!isNaN(val)) updateDatosPersonales({ peso: val });
+}}
                   className="bg-gray-800 border-gray-700 text-white focus:border-cyan-500"
                 />
               </div>
@@ -206,7 +209,10 @@ export default function Home() {
                 <Input
                   type="number"
                   value={datosPersonales.pesoObjetivo}
-                  onChange={e => updateDatosPersonales({ pesoObjetivo: parseFloat(e.target.value) || 0 })}
+                  onChange={e => {
+  const val = parseFloat(e.target.value);
+  if (!isNaN(val)) updateDatosPersonales({ pesoObjetivo: val });
+}}
                   className="bg-gray-800 border-gray-700 text-white focus:border-cyan-500"
                 />
               </div>
@@ -217,7 +223,10 @@ export default function Home() {
                 <Input
                   type="number"
                   value={datosPersonales.edad}
-                  onChange={e => updateDatosPersonales({ edad: parseInt(e.target.value) || 0 })}
+                  onChange={e => {
+  const val = parseInt(e.target.value);
+  if (!isNaN(val)) updateDatosPersonales({ edad: val });
+}}
                   className="bg-gray-800 border-gray-700 text-white focus:border-cyan-500"
                 />
               </div>
@@ -228,7 +237,10 @@ export default function Home() {
                 <Input
                   type="number"
                   value={datosPersonales.altura}
-                  onChange={e => updateDatosPersonales({ altura: parseFloat(e.target.value) || 0 })}
+                  onChange={e => {
+  const val = parseFloat(e.target.value);
+  if (!isNaN(val)) updateDatosPersonales({ altura: val });
+}}
                   className="bg-gray-800 border-gray-700 text-white focus:border-cyan-500"
                 />
               </div>
