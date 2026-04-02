@@ -444,6 +444,30 @@ export function calcularMacros(
   const hidratosKcal = caloriasConsumir - proteinaKcal - grasasKcal;
   const hidratosGrTotal = hidratosKcal / 4;
   const hidratosGrKg = hidratosGrTotal / peso;
+  if (caloriasConsumir <= 0) {
+  return {
+    proteinaGrKg: 0,
+    proteinaGrTotal: 0,
+    proteinaKcal: 0,
+    proteinaPct: 0,
+    proteinaIntercambios: 0,
+    grasasGrKg: 0,
+    grasasGrTotal: 0,
+    grasasKcal: 0,
+    grasasPct: 0,
+    grasasIntercambios: 0,
+    hidratosGrKg: 0,
+    hidratosGrTotal: 0,
+    hidratosKcal: 0,
+    hidratosPct: 0,
+    hidratosIntercambios: 0,
+    kcalTotales: 0,
+    creatina: 0,
+    cafeina: 0,
+    betaAlanina: 0,
+    hidratosOffGrKg: 0,
+  };
+}
 
   const proteinaPct = (proteinaKcal / caloriasConsumir) * 100;
   const grasasPct = (grasasKcal / caloriasConsumir) * 100;
