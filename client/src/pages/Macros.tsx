@@ -214,8 +214,8 @@ export default function Macros() {
             className="border-gray-700 text-gray-300 hover:bg-gray-800 bg-transparent">
             <ChevronLeft size={16} className="mr-1" /> Resultados
           </Button>
-          <Button onClick={() => navigate("/menu-a")} className="bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-semibold">
-            Ver Menú A <ChevronRight size={16} className="ml-1" />
+          <Button onClick={() => navigate("/menu")} className="bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-semibold">
+            Ir al Menú <ChevronRight size={16} className="ml-1" />
           </Button>
         </div>
       </div>

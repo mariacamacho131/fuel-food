@@ -9,9 +9,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Resultados from "./pages/Resultados";
 import Macros from "./pages/Macros";
-import MenuDiaA from "./pages/MenuDiaA";
-import MenuDiaB from "./pages/MenuDiaB";
-import DiaPartido from "./pages/DiaPartido";
+import Menu from "./pages/Menu";
 import Alimentos from "./pages/Alimentos";
 
 function Router() {
@@ -21,9 +19,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/resultados" component={Resultados} />
         <Route path="/macros" component={Macros} />
-        <Route path="/menu-a" component={MenuDiaA} />
-        <Route path="/menu-b" component={MenuDiaB} />
-        <Route path="/partido" component={DiaPartido} />
+        <Route path="/menu" component={Menu} />
         <Route path="/alimentos" component={Alimentos} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />

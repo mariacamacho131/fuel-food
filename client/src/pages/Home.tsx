@@ -98,15 +98,15 @@ export default function Home() {
   const rangosGrasa = datosPersonales.genero === "Mujer" ? RANGOS_GRASA_MUJER : RANGOS_GRASA_HOMBRE;
 
   return (
-    <div className="min-h-screen bg-gray-950 p-6">
+    <div className="min-h-screen bg-gray-950 p-4 md:p-6">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white tracking-tight">Calculadora Nutricional</h1>
-        <p className="text-gray-400 text-sm mt-1">Completa los pasos para obtener tu plan personalizado</p>
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">Calculadora Nutricional</h1>
+        <p className="text-gray-400 text-xs md:text-sm mt-1">Completa los pasos para obtener tu plan personalizado</p>
       </div>
 
       {/* Step indicator */}
-      <div className="flex items-center gap-2 mb-8">
+      <div className="flex items-center gap-1 md:gap-2 mb-6 md:mb-8 overflow-x-auto pb-2">
         {PASOS.map((p, idx) => {
           const Icon = p.icon;
           const isActive = idx === paso;
@@ -116,7 +116,7 @@ export default function Home() {
               <button
                 onClick={() => idx < paso && setPaso(idx)}
                 className={cn(
-                  "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all",
+                  "flex items-center gap-1 md:gap-2 px-2 md:px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap",
                   isActive ? "bg-cyan-500 text-gray-950" :
                   isDone ? "bg-cyan-500/20 text-cyan-400 cursor-pointer hover:bg-cyan-500/30" :
                   "bg-gray-800 text-gray-500"
@@ -135,14 +135,14 @@ export default function Home() {
 
       {/* Pantalla de bienvenida (solo primera vez) */}
       {paso === 0 && !state.resultadosCalorias && state.pasoMaxAlcanzado === 0 && (
-        <div className="mb-6 bg-gradient-to-r from-cyan-500/10 to-gray-900 border border-cyan-500/20 rounded-xl p-5 max-w-2xl">
+        <div className="mb-6 bg-gradient-to-r from-cyan-500/10 to-gray-900 border border-cyan-500/20 rounded-xl p-4 md:p-5 max-w-2xl">
           <div className="flex items-start gap-4">
             <div className="flex-1">
-              <h2 className="text-base font-semibold text-white mb-1">Bienvenido a NutritionFC</h2>
-              <p className="text-sm text-gray-400">
+              <h2 className="text-sm md:text-base font-semibold text-white mb-1">Bienvenido a NutritionFC</h2>
+              <p className="text-xs md:text-sm text-gray-400">
                 Completa los 4 pasos para obtener tu plan nutricional personalizado: calorías, macros, menú semanal y protocolo de competición.
               </p>
-              <div className="flex gap-4 mt-3">
+              <div className="flex gap-2 md:gap-4 mt-3 flex-wrap">
                 {["Datos personales", "% Grasa corporal", "Actividad física", "Gasto deportivo"].map((s, i) => (
                   <div key={i} className="flex items-center gap-1.5">
                     <div className="w-5 h-5 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center">
@@ -159,12 +159,12 @@ export default function Home() {
 
       {/* Paso 0: Datos básicos */}
       {paso === 0 && (
-        <div className="max-w-2xl">
-          <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <div className="max-w-2xl w-full">
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 md:p-6">
             <h2 className="text-lg font-semibold text-white mb-5 flex items-center gap-2">
               <User size={18} className="text-cyan-400" /> Datos personales
             </h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               {/* Género */}
               <div className="col-span-2">
                 <Label className="text-gray-300 text-sm mb-2 block">Género</Label>

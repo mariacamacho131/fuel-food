@@ -1,13 +1,15 @@
-/**
+/*
  * Layout principal — Athletic Dashboard Oscuro
  * Sidebar izquierdo con navegación entre secciones + área de contenido principal
+ * Optimizado para mobile con sidebar colapsable
  */
 
+import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useNutrition } from "@/contexts/NutritionContext";
 import { cn } from "@/lib/utils";
 import {
-  Calculator, BarChart3, UtensilsCrossed, Calendar, Trophy, Database, ChevronRight,
+  Calculator, BarChart3, UtensilsCrossed, Calendar, Trophy, Database, ChevronRight, Menu, X,
   PieChart, Lock
 } from "lucide-react";
 
@@ -17,10 +19,8 @@ const navItems = [
   { path: "/", label: "Mis Datos", icon: Calculator, step: 0, desc: "Datos personales y deporte" },
   { path: "/resultados", label: "Resultados", icon: BarChart3, step: 1, desc: "Calorías y composición" },
   { path: "/macros", label: "Macronutrientes", icon: PieChart, step: 2, desc: "Distribución de macros" },
-  { path: "/menu-a", label: "Menú Día A", icon: UtensilsCrossed, step: 3, desc: "Días de entrenamiento" },
-  { path: "/menu-b", label: "Menú Día B", icon: Calendar, step: 4, desc: "Días de descanso" },
-  { path: "/partido", label: "Día de Partido", icon: Trophy, step: 5, desc: "Protocolo competición" },
-  { path: "/alimentos", label: "Alimentos", icon: Database, step: 6, desc: "Base de datos" },
+  { path: "/menu", label: "Menú del Día", icon: UtensilsCrossed, step: 3, desc: "Selecciona tus alimentos" },
+  { path: "/alimentos", label: "Alimentos", icon: Database, step: 4, desc: "Base de datos" },
 ];
 
 // Alimentos siempre accesible; resultados/macros/menús requieren cálculo previo
@@ -28,15 +28,41 @@ const ALWAYS_ACCESSIBLE = new Set(["/", "/alimentos"]);
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { state } = useNutrition();
   const { pasoMaxAlcanzado, resultadosCalorias } = state;
 
   return (
     <div className="flex min-h-screen bg-gray-950">
+      {/* Mobile menu button */}
+      <div className="fixed top-0 left-0 right-0 z-50 md:hidden bg-gray-900 border-b border-gray-800 px-4 py-3 flex items-center justify-between">
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+        >
+          {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+        <img src={LOGO_URL} alt="FuelFood" className="h-8 w-auto" />
+        <div className="w-10" />
+      </div>
+
+      {/* Overlay para cerrar sidebar en mobile */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 md:hidden bg-black/50"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 shrink-0 bg-gray-900 border-r border-gray-800 flex flex-col">
-        {/* Logo */}
-        <div className="px-4 py-4 border-b border-gray-800 flex items-center justify-center">
+      <aside
+        className={cn(
+          "fixed md:static top-0 left-0 bottom-0 z-40 w-64 shrink-0 bg-gray-900 border-r border-gray-800 flex flex-col transition-transform duration-300 md:translate-x-0 pt-16 md:pt-0",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        {/* Logo (desktop only) */}
+        <div className="hidden md:flex px-4 py-4 border-b border-gray-800 items-center justify-center">
           <img
             src={LOGO_URL}
             alt="FuelFood"
@@ -45,7 +71,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 p-3 space-y-1">
+        <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
           {navItems.map((item, idx) => {
             const isActive = location === item.path;
             const isUnlocked = ALWAYS_ACCESSIBLE.has(item.path) || resultadosCalorias !== null || item.step === 0;
@@ -54,6 +80,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             return (
               <Link key={item.path} href={item.path}>
                 <div
+                  onClick={() => setSidebarOpen(false)}
                   className={cn(
                     "group flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 cursor-pointer",
                     isActive
@@ -64,7 +91,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   )}
                 >
                   <div className={cn(
-                    "flex items-center justify-center w-8 h-8 rounded-md transition-colors",
+                    "flex items-center justify-center w-8 h-8 rounded-md transition-colors flex-shrink-0",
                     isActive ? "bg-cyan-500/20 text-cyan-400" : "bg-gray-800 text-gray-400 group-hover:bg-gray-700"
                   )}>
                     <Icon size={16} />
@@ -98,7 +125,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto w-full md:w-auto pt-16 md:pt-0">
         {children}
       </main>
     </div>
