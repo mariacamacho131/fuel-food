@@ -57,8 +57,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed md:static top-0 left-0 bottom-0 z-40 w-64 shrink-0 bg-gray-900 border-r border-gray-800 flex flex-col transition-transform duration-300 md:translate-x-0 pt-16 md:pt-0",
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          "w-64 shrink-0 bg-gray-900 border-r border-gray-800 flex flex-col transition-transform duration-300",
+          "fixed md:static top-0 left-0 bottom-0 z-40 pt-16 md:pt-0",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
       >
         {/* Logo (desktop only) */}
