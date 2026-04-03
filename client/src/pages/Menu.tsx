@@ -107,10 +107,9 @@ function SelectorAlimento({
       
       {open && (
         <div className={cn(
-          "absolute z-50 bg-gray-800 border border-gray-700 rounded-xl shadow-2xl p-3 md:p-4",
-          "md:top-full md:left-1/2 md:transform md:-translate-x-1/2 md:mt-2 md:w-96",
-          "fixed md:fixed bottom-0 md:bottom-auto left-0 md:left-auto right-0 md:right-auto",
-          "w-full md:w-96 rounded-b-none md:rounded-b-xl"
+          "fixed z-50 bg-gray-800 border border-gray-700 rounded-xl shadow-2xl p-3 md:p-4",
+          "bottom-0 left-0 right-0 rounded-b-none",
+          "md:absolute md:bottom-auto md:left-1/2 md:right-auto md:-translate-x-1/2 md:top-full md:mt-2 md:w-96 md:rounded-b-xl"
         )}>
           <div className="mb-3">
             <input
